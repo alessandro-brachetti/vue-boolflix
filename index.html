@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Boolflix</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/master.css">
+</head>
+<body>
+<div id="root">
+  <div class="container">
+    <div class="search-bar">
+      <input v-model="queryInput" type="text" name="search" placeholder="Search..">
+      <button @click="searchMovie" type="button" name="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="movie-wrapper">
+      <div class="movie-info" v-for="movie in moviesSearched">
+        <h3 class="title">{{ movie.title }}</h3>
+        <h4 class="original-title">{{ movie.original_title }}</h4>
+        <p class="language"> LINGUA: {{ movie.original_language }}</p>
+        <p class="vote-average">VOTO: {{ movie.vote_average }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="assets/js/main.js" charset="utf-8"></script>
+</body>
+</html>
