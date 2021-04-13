@@ -12,19 +12,30 @@
 <body>
 <div id="root">
   <div class="container">
-    <div class="search-bar">
-      <input v-model="queryInput" type="text" name="search" placeholder="Search..">
-      <button @click="searchMovie" type="button" name="button"><i class="fa fa-search"></i></button>
-    </div>
+    <header>
+      <h1 class="header-title">BOOLFLIX</h1>
+      <div class="search-bar">
+        <input v-model="queryInput" @keyup.enter="search" type="text" name="search" placeholder="Search..">
+        <button @click="search" type="button" name="button"><i class="fa fa-search"></i></button>
+      </div>
+    </header>
     <div class="movie-wrapper">
-      <div class="movie-info" v-for="movie in moviesSearched">
-        <h3 class="title">{{ movie.title }}</h3>
-        <h4 class="original-title">{{ movie.original_title }}</h4>
-        <p class="language"> LINGUA: {{ movie.original_language }}</p>
-        <p class="vote-average">VOTO: {{ movie.vote_average }}</p>
+      <div class="movie-card" v-for="movie in movies" :key="movie.title">
+        <div class="movie-poster">
+          <img :src="getPoster(movie)" :alt="movie.title">
+        </div>
+        <div class="movie-info">
+          <h3 class="title">{{ getTitle(movie) }}</h3>
+          <h4 class="original-title">{{ getOriginalTitle(movie) }}</h4>
+          <img class="flags" :src="'https://www.unknown.nu/flags/images/' + movie.original_language + '-100'" :alt="movie.original_language">
+          <div class="vote-average">
+            VOTO:
+            <i class="fas fa-star" v-for="number in getVote(movie.vote_average)"></i>
+            <i class="far fa-star" v-for="numberi in 5 - getVote(movie.vote_average)"></i>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
 

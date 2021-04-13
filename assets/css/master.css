@@ -4,22 +4,34 @@
   border: 0;
   box-sizing: border-box;
 }
-
-.search-bar {
+header {
   height: 100px;
   background-color: #e9e9e9;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-self: center;
 }
-.search-bar input {
+.header-title {
+  align-self: flex-start;
+
+  padding:5px 20px;
+}
+.search-bar {
   width: 30%;
+
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+header .search-bar input {
+  width: 100%;
   height: 30px;
   padding: 6px;
   margin-top: 8px;
   font-size: 17px;
   border: none;
+  outline: none;
 }
 .search-bar button {
   background-color: #e9e9e9;
@@ -39,8 +51,12 @@
   justify-content: space-between;
 }
 .movie-info {
+  /* display: none; */
   width: 400px;
-  margin: 20px 30px;
+  margin: 20px 35px;
   border: 1px solid grey;
-
+}
+.movie-info img {
+  width: 20px;
+  height: 16px;
 }
