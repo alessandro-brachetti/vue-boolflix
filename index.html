@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Boolflix</title>
 
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
   <link rel="stylesheet" href="assets/css/master.css">
 </head>
@@ -13,29 +15,42 @@
 <div id="root">
   <div class="container">
     <header>
-      <h1 class="header-title">BOOLFLIX</h1>
+      <div class="nav-bar">
+        <h1 class="header-title">BOOLFLIX</h1>
+      </div>
       <div class="search-bar">
         <input v-model="queryInput" @keyup.enter="search" type="text" name="search" placeholder="Search..">
         <button @click="search" type="button" name="button"><i class="fa fa-search"></i></button>
       </div>
     </header>
-    <div class="movie-wrapper">
-      <div class="movie-card" v-for="movie in movies" :key="movie.title">
-        <div class="movie-poster">
-          <img :src="getPoster(movie)" :alt="movie.title">
-        </div>
-        <div class="movie-info">
-          <h3 class="title">{{ getTitle(movie) }}</h3>
-          <h4 class="original-title">{{ getOriginalTitle(movie) }}</h4>
-          <img class="flags" :src="'https://www.unknown.nu/flags/images/' + movie.original_language + '-100'" :alt="movie.original_language">
-          <div class="vote-average">
-            VOTO:
-            <i class="fas fa-star" v-for="number in getVote(movie.vote_average)"></i>
-            <i class="far fa-star" v-for="numberi in 5 - getVote(movie.vote_average)"></i>
+    <main>
+      <h1 v-if="errorMessage"> MOVIE OR TV-SHOW NOT FOUND, TRY SEARCH AGAIN...</h1>
+      <div class="movie-wrapper" v-for="movie in movies" :key="movie.title">
+        <div class="movie-card">
+          <div class="movie-poster">
+            <img :src="getPoster(movie)" :alt="movie.title">
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">"{{ getTitle(movie) }}"</h3>
+            <h4 class="original-title" v-if="movie.original_title != movie.title">"{{ getOriginalTitle(movie) }}"</h4>
+            <div class="overview"> {{ movie.overview }}</div>
+            <div class="flag-wrapper">
+              Language:
+              <img :src="'https://www.unknown.nu/flags/images/' + movie.original_language + '-100'" :alt="movie.original_language">
+            </div>
+            <div class="vote-average">
+              Vote:
+              <i class="fas fa-star" v-for="number in getVote(movie.vote_average)"></i>
+              <i class="far fa-star" v-for="number in 5 - getVote(movie.vote_average)"></i>
+            </div>
+            <!-- <div class="cast">
+              Cast: <span>{{}}</span>
+            </div> -->
           </div>
         </div>
       </div>
-    </div>
+    </main>
+
   </div>
 </div>
 
